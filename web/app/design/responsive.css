@@ -120,3 +120,89 @@
 
 /* the sticky header must not hide the heading the skip link jumps to */
 #main { scroll-margin-top: calc(var(--header-h) + var(--s4)); }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PHONE — designed for the phone, not scaled down from the desktop.
+   Everything below is inside a mobile query or a coarse-pointer query, so the
+   desktop layout is untouched.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1 · chrome costs vertical space, so it pays for it ────────────────────
+   Two rows is the floor here — brand and identity cannot share a line with a
+   usable search field — but the rows themselves were loose. */
+@media (max-width: 620px) {
+  .top .in { padding: var(--s2) var(--s4); row-gap: var(--s2); }
+  .psearch .pin { min-height: var(--h-sm); }
+  .menub { padding: 0 var(--s3); }
+  .top .who { gap: var(--s2); }
+  .top .who .av { width: 30px; height: 30px; font-size: 12px; }
+}
+
+/* ── 2 · the page title must not break mid-phrase ──────────────────────────
+   At 320 the breadcrumb split "Account / details › Personal / details". Each
+   segment now holds together and the line breaks between them instead. */
+@media (max-width: 620px) {
+  .phead h1 { flex-wrap: wrap; row-gap: 2px; }
+  .phead h1 > span { white-space: nowrap; }
+  .phead { margin-bottom: var(--s4); padding-bottom: var(--s3); }
+}
+
+/* ── 3 · the navigation sheet is full height ───────────────────────────────
+   globals.css caps .rail at calc(100vh - 90px) for its desktop sticky
+   position. As a fixed sheet that cap cut the bottom 90px off, and on iOS
+   100vh is larger than the visible viewport, so it cut more. */
+@media (max-width: 999px) {
+  .rail {
+    max-height: none;
+    height: 100vh;
+    height: 100dvh;
+    padding-bottom: calc(var(--s7) + env(safe-area-inset-bottom, 0px));
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ── 4 · iOS Safari and the fixed background ───────────────────────────────
+   background-attachment: fixed is unsupported on iOS and forces a repaint of a
+   900KB image on every scroll frame. The image stays; it just scrolls with the
+   page on phones, which is what iOS does anyway. */
+@media (max-width: 999px) {
+  body { background-attachment: scroll; }
+}
+
+/* ── 5 · one blurred surface per card is a phone GPU's whole budget ────────
+   Dropping the per-card backdrop-filter and making the surface more opaque
+   costs nothing visually at this size and buys back scroll smoothness — and
+   raises text contrast over the background image. */
+@media (max-width: 999px) {
+  .card, details.cardc, .att, .fund, .riskcard { backdrop-filter: none; }
+  .card, details.cardc { background: rgba(255, 255, 255, .97); }
+  .mod .box, .pres, .fundmenu, .toast { backdrop-filter: none; }
+}
+
+/* ── 6 · dynamic viewport for anything measured against the window ─────────
+   vh on mobile Safari is the largest viewport, so an 88vh panel is taller than
+   the screen while the toolbars are showing. */
+@media (max-width: 999px) {
+  .fl-card, .mod .box { max-height: 88vh; max-height: 88dvh; }
+  .pres { max-height: min(60vh, 430px); max-height: min(60dvh, 430px); }
+}
+
+/* ── 7 · settings rows read as rows, not as two columns squeezed together ──
+   A row's control drops under its label rather than fighting it for width. */
+@media (max-width: 620px) {
+  .prow { gap: var(--s3); padding: var(--s4) 0; }
+  .prow .t { flex: 1 1 100%; }
+  .prow .c { margin-top: 0; }
+  .seg { gap: var(--s3); padding: var(--s4) 0; }
+  .chead { flex-wrap: wrap; gap: var(--s3); }
+  .chead .act { margin-left: 0; flex: 1 1 100%; }
+}
+
+/* ── 8 · the flow footer is the primary action on a phone ──────────────────
+   Full width, thumb-reachable, clear of the home indicator. */
+@media (max-width: 620px) {
+  .flf .in { flex-direction: column-reverse; align-items: stretch; gap: var(--s2); }
+  .flf .in .btn { width: 100%; }
+}

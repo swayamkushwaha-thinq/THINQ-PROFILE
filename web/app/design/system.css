@@ -234,7 +234,24 @@ hr.sep { border: none; border-top: 1px solid var(--line); margin: var(--s6) 0; }
          letter-spacing: .02em; margin-bottom: var(--s1); }
 .kv dd { margin: 0; font-size: var(--t-body); color: var(--ink); font-weight: 500;
          display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; min-width: 0; min-height: 28px; }
-.kv dd .val { font-variant-numeric: tabular-nums; word-break: break-word; min-.seg { display: flex; align-items: center; gap: var(--s4); padding: var(--s5) 0;
+.kv dd .val { font-variant-numeric: tabular-nums; word-break: break-word; min-width: 0; }
+
+/* ══ LIST ROWS ══════════════════════════════════════════════════════════════
+   Rows, not boxes: a rule between items reads as one list; a border around each
+   reads as a stack of unrelated cards. */
+.prow {
+  display: flex; align-items: flex-start; gap: var(--s5);
+  padding: var(--s5) 0; border-bottom: 1px solid var(--line); flex-wrap: wrap;
+}
+.prow:last-child { border-bottom: none; padding-bottom: 0; }
+.prow:first-child { padding-top: 0; }
+.prow .t { flex: 1 1 220px; min-width: 0; }
+.prow .t b { display: block; font-size: var(--t-h3); font-weight: 600; letter-spacing: -.005em; }
+.prow .t span { display: block; font-size: var(--t-support); color: var(--ink-2);
+                margin-top: var(--s1); line-height: var(--lh-body); max-width: var(--measure); }
+.prow .c { flex: 0 0 auto; margin-top: 2px; }
+
+.seg { display: flex; align-items: center; gap: var(--s4); padding: var(--s5) 0;
        border-bottom: 1px solid var(--line); }
 .seg:last-child { border-bottom: none; padding-bottom: 0; }
 .seg:first-child { padding-top: 0; }
@@ -712,8 +729,10 @@ table.t tr:last-child td { border-bottom: none; }
       border: 1px solid var(--line-2); border-radius: var(--r-sm); padding: 1px 5px; }
 .spin { border: 2px solid var(--brand-line); border-top-color: var(--brand); }
 .big { font-family: var(--mono); font-size: 34px; color: var(--brand); }
-.col .chev::before, .col .chev::after,
-details.cardc .chev::before, details.cardc .chev::after { background: var(--ink-3); }
+/* .chev is drawn in globals.css with border-right/border-bottom and takes its
+   colour from currentColor, so it needs nothing here. An earlier `background`
+   on these pseudo-elements — written for a two-bar chevron that no longer
+   exists — filled the box and rendered a solid diamond. */
 .fine summary::after { border-right-color: var(--ink-3); border-bottom-color: var(--ink-3); }
 
 /* ══ MOTION ═════════════════════════════════════════════════════════════════ */
