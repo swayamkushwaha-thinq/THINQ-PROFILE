@@ -6,7 +6,7 @@
    I" is answered from across the room, not by reading. */
 import { useEffect, useRef, useSyncExternalStore } from 'react'
 import { getCur, go, railDef, subscribe, getSnapshot, getServerSnapshot } from '@/lib/store'
-import { ui, subscribeUi, getUiSnapshot, getUiServerSnapshot, setRail, setNavGroup, toast } from '@/lib/ui'
+import { ui, subscribeUi, getUiSnapshot, getUiServerSnapshot, setRail, setNavGroup, setMobileDetail, toast } from '@/lib/ui'
 import { remaskAll } from '@/lib/vault'
 import { confirmModal } from './ConfirmModal'
 import { closeModal } from '@/lib/ui'
@@ -41,18 +41,12 @@ export function Rail() {
   const toggleGroup = (g: string) => {
     const isOpening = openGroup !== g
     setNavGroup(isOpening ? g : '')
-    if (isOpening) {
-      const targetGroup = groups.find((grp) => grp.g === g)
-      const firstItem = targetGroup?.items?.find((it) => it[2] !== 'out')
-      if (firstItem && firstItem[0]) {
-        navigate(firstItem[0])
-      }
-    }
   }
 
   const navigate = (id: string) => {
     if (id === 'signout') { signOut(); return }
     go(id)
+    setMobileDetail(true)
     setRail(false)
     const b = document.getElementById('menuBtn')
     if (b) b.setAttribute('aria-expanded', 'false')
@@ -72,9 +66,41 @@ export function Rail() {
   }, [ui.railOpen])
 
   return (
-    <aside className={'rail' + (ui.railOpen ? ' on' : '')} id="rail" ref={panel}
+    <aside className={'rail' + (ui.railOpen ? ' on' : '') + (ui.mobileDetail ? ' mobile-hide-rail' : '')} id="rail" ref={panel}
            onClick={(e) => { if (e.target === e.currentTarget) setRail(false) }}>
       <button className="btn sec sm railx" id="railX" type="button" onClick={() => setRail(false)}>Close menu</button>
+      
+      {/* Top User Profile Header (matching requested layout) */}
+      <div className="rail-user-profile" style={{ padding: '16px 12px 14px', borderBottom: '1px solid var(--line)', marginBottom: '12px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '12px' }}>
+          <div style={{
+            width: '64px', height: '64px', borderRadius: '50%', background: 'linear-gradient(135deg, #0e3b43, #082830)',
+            color: '#ffffff', display: 'grid', placeItems: 'center', fontSize: '24px', fontWeight: 700,
+            border: '2px solid var(--line2)', marginBottom: '8px', boxShadow: '0 4px 14px rgba(8,40,48,0.25)'
+          }}>
+            A
+          </div>
+          <div style={{ fontSize: '15.5px', fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.01em' }}>ARVIND YADAV</div>
+        </div>
+
+        {/* Wallet Balance Row */}
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          background: 'var(--surface-2)', border: '1px solid var(--line)', borderRadius: '12px', padding: '10px 14px'
+        }}>
+          <div>
+            <div style={{ fontSize: '15px', fontWeight: 700, color: 'var(--ink)' }}>₹2,512.00</div>
+            <div style={{ fontSize: '11px', color: 'var(--ink-3)', marginTop: '1px' }}>Stocks, FnO Balance</div>
+          </div>
+          <button className="mini" type="button" style={{
+            padding: '4px 10px', fontSize: '11.5px', borderRadius: '999px',
+            background: 'var(--ok-soft)', color: 'var(--ok)', border: '1px solid var(--ok-line)', fontWeight: 600
+          }} onClick={() => toast('Add money interface')}>
+            + Add money
+          </button>
+        </div>
+      </div>
+
       <nav id="nav" aria-label="Account sections">
         {groups.map((grp, gi) => {
           const bodyId = 'navsec-' + gi

@@ -18,45 +18,63 @@
   .shell { gap: var(--s7); }
 }
 
+.rail-user-profile { display: none; }
+
 /* ══ TABLET / SMALL LAPTOP — navigation becomes a sheet ═════════════════════ */
 @media (max-width: 999px) {
+  .rail-user-profile { display: block; }
   .shell {
     grid-template-columns: minmax(0, 1fr);
-    gap: 0;
+    gap: var(--s6);
     padding: var(--s6) var(--s5) var(--s9);
   }
-  /* A slide-in panel, not a full-bleed list: it reads as a layer over the page
-     and keeps the page visible behind it, so it is obvious how to get back. */
   .rail {
-    position: fixed; inset: 0 auto 0 0; z-index: 60;
-    width: min(340px, 88vw);
-    background: var(--surface);
-    border-right: 1px solid var(--line);
-    box-shadow: var(--e-3);
-    padding: var(--s5) var(--s5) calc(var(--s8) + env(safe-area-inset-bottom, 0px));
-    overflow-y: auto;
-    display: none;
+    position: static !important; inset: auto !important; z-index: 1 !important;
+    width: 100% !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    display: block !important;
   }
-  .rail.on { display: block; }
-  /* scrim */
-  .rail.on::before {
-    content: ""; position: fixed; inset: 0; z-index: -1;
-    background: rgba(16, 23, 26, .38);
+  .rail.mobile-hide-rail { display: none !important; height: 0 !important; overflow: hidden !important; margin: 0 !important; padding: 0 !important; }
+  .railx { display: none !important; }
+  .menub { display: none !important; }
+  .top .who .av, .top .who .nm { display: none !important; }
+  .psearch { position: relative !important; flex: 1 !important; max-width: none !important; margin-left: var(--s2) !important; }
+
+  .top.mobile-detail-header .mark { display: none !important; }
+  .top.mobile-detail-header .mobile-header-back { display: inline-flex !important; }
+  .top.mobile-detail-header .psearch { display: none !important; }
+
+  .page { display: none !important; }
+  .page.mobile-show-page { display: block !important; }
+
+  /* Vertical progress timeline on mobile */
+  .tl {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 18px !important;
+    padding-left: 4px !important;
   }
-  .railx {
-    display: inline-flex; margin-bottom: var(--s5); width: 100%;
-    justify-content: center; min-height: var(--h-md);
+  .tl li {
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    gap: 12px !important;
   }
-  .menub {
-    display: inline-flex; align-items: center; gap: var(--s2);
-    min-height: var(--h-sm); padding: 0 var(--s4);
-    background: var(--surface); border: 1px solid var(--line-2); border-radius: var(--r-pill);
-    font-size: 13px; font-weight: 500; color: var(--ink); cursor: pointer;
-    transition: background var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
+  .tl li::before {
+    top: 18px !important;
+    left: 8px !important;
+    bottom: -20px !important;
+    right: auto !important;
+    width: 2px !important;
+    height: auto !important;
   }
-  .menub:hover { background: var(--surface-2); border-color: var(--line-strong); }
-  .top .who .nm { display: none; }
-  .psearch { max-width: none; margin-left: var(--s2); }
+  .tl li:last-child::before { display: none !important; }
 }
 @media (min-width: 1000px) { .railx { display: none; } }
 
@@ -192,12 +210,12 @@
 /* ── 7 · settings rows read as rows, not as two columns squeezed together ──
    A row's control drops under its label rather than fighting it for width. */
 @media (max-width: 620px) {
-  .prow { gap: var(--s3); padding: var(--s4) 0; }
-  .prow .t { flex: 1 1 100%; }
-  .prow .c { margin-top: 0; }
+  .prow { flex-wrap: nowrap !important; gap: var(--s3); justify-content: space-between; align-items: flex-start; }
+  .prow .t { flex: 1 1 auto !important; min-width: 0; }
+  .prow .c { margin-left: auto !important; flex: 0 0 auto !important; margin-top: 0; align-self: flex-start; }
   .seg { gap: var(--s3); padding: var(--s4) 0; }
-  .chead { flex-wrap: wrap; gap: var(--s3); }
-  .chead .act { margin-left: 0; flex: 1 1 100%; }
+  .chead { flex-wrap: nowrap !important; gap: var(--s3); justify-content: space-between; }
+  .chead .act { margin-left: auto !important; flex: 0 0 auto !important; align-self: flex-start; }
 }
 
 /* ── 8 · the flow footer is the primary action on a phone ──────────────────

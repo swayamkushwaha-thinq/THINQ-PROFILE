@@ -19,13 +19,13 @@
   --brand-line:   rgba(3, 33, 41, .16);
   --on-brand:     #ffffff;
 
-  /* five surface levels, §4 — each is visibly a step, not a hair */
-  --canvas:       #e9edee;   /* 1 · the page itself                      */
-  --surface:      #ffffff;   /* 2 · primary content panel                */
-  --surface-2:    #f4f7f7;   /* 3 · nested / interactive block           */
-  --field:        #ffffff;   /* 4 · inputs and controls                  */
-  --raised:       #ffffff;   /* 5 · menus, modals, toasts (+ shadow)     */
-  --canvas-deep:  #dfe5e6;   /* wells and inset areas                    */
+  /* five surface levels — translucent for light background image visibility */
+  --canvas:       transparent;
+  --surface:      rgba(255, 255, 255, 0.88);   /* 2 · primary content panel                */
+  --surface-2:    rgba(244, 247, 247, 0.90);   /* 3 · nested / interactive block           */
+  --field:        rgba(255, 255, 255, 0.92);   /* 4 · inputs and controls                  */
+  --raised:       rgba(255, 255, 255, 0.95);   /* 5 · menus, modals, toasts (+ shadow)     */
+  --canvas-deep:  rgba(223, 229, 230, 0.75);   /* wells and inset areas                    */
 
   /* ink */
   --ink:          #10171a;   /* primary text            */

@@ -5,7 +5,7 @@
    Enter, Escape, "/" and ⌘K) is the prototype's, unchanged. */
 import { Fragment, useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import { db, go, isPost, subscribe, getSnapshot, getServerSnapshot } from '@/lib/store'
-import { ui, subscribeUi, getUiSnapshot, getUiServerSnapshot, setRail, setPbarOpen } from '@/lib/ui'
+import { ui, subscribeUi, getUiSnapshot, getUiServerSnapshot, setRail, setPbarOpen, setMobileDetail } from '@/lib/ui'
 import { buildIndex, searchProfile, flashRow, type IndexEntry } from '@/lib/search'
 import { Icon } from './Icon'
 
@@ -91,13 +91,14 @@ export function TopBar() {
   const who = (isPost() || db.state === 'submitted') ? db.display : 'Arvind'
 
   return (
-    <header className="top">
+    <header className={'top' + (ui.mobileDetail ? ' mobile-detail-header' : '')}>
       <div className="in">
-        {/* zone 1 — brand. Nothing precedes it but the menu affordance the
-            small-screen sheet needs. */}
-        <button className="menub" id="menuBtn" type="button" aria-expanded={ui.railOpen}
-                aria-controls="rail" onClick={() => setRail(!ui.railOpen)}>
-          <Icon name="menu" size={16} />Menu
+        {/* Mobile Header Back Arrow — replaces logo on detail screens */}
+        <button className="mobile-header-back" type="button" aria-label="Back to Profile Menu" title="Back to Profile Menu" onClick={() => setMobileDetail(false)}>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
         </button>
         <span className="mark"><span className="wm">Th<span className="i">i</span>nq</span><span className="sub">Profile</span></span>
         <div className="psearch" ref={wrap}>

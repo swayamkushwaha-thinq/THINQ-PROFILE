@@ -10,7 +10,7 @@
 <style>
 :root{
   /* Thinq Platinum Chromatic — tokens as shipped in thinq-journey-v3 / thinq-support */
-  --bg:#0b0b0d; --bg2:#101014; --card:#15151b; --card2:#1b1b22; --elev:#20202a;
+  --bg:#0b0b0d; --bg2:rgba(16,16,20,.78); --card:rgba(21,21,27,.75); --card2:rgba(27,27,34,.78); --elev:rgba(32,32,42,.85);
   --ink:#f4efe6; --soft:#a49f95; --faint:#726d64;
   --line:#26262f; --line2:#34343f;
   --gold:#e5c158; --gold-2:#d4af37; --gold-ink:#f3d98a; --gold-deep:#a9821f;
@@ -25,7 +25,7 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{background:#f7f9fa url('bg-pattern.png') no-repeat center top fixed;background-size:cover;color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--gold-wash);color:var(--gold-ink)}
 h1,h2,h3,h4{margin:0;font-family:var(--head);font-weight:600;letter-spacing:-.01em}
 button{font:inherit;color:inherit}
@@ -78,7 +78,7 @@ hr.sep{border:none;border-top:1px solid var(--line);margin:22px 0}
 .header-proto-btn{background:linear-gradient(135deg,rgba(229,193,88,.15),rgba(229,193,88,.03));border:1px solid var(--gold-line);border-radius:999px;padding:5px 14px;font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--gold);cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:all .2s cubic-bezier(0.4,0,0.2,1);box-shadow:0 2px 8px rgba(0,0,0,.12)}
 .header-proto-btn:hover{transform:translateY(-1px);border-color:var(--gold);box-shadow:0 4px 14px rgba(229,193,88,.25);background:linear-gradient(135deg,rgba(229,193,88,.25),rgba(229,193,88,.08))}
 .header-proto-btn.active{background:var(--gold);color:var(--on-gold);border-color:var(--gold);box-shadow:0 0 16px rgba(229,193,88,.35)}
-.menub{display:none;background:none;border:1px solid var(--line2);border-radius:999px;padding:6px 11px;font-size:12.5px;color:var(--soft);cursor:pointer}
+.menub{display:none;background:none;border:1px solid var(--line2);border-radius:999px;width:36px;height:36px;padding:0;color:var(--ink);cursor:pointer;align-items:center;justify-content:center}
 
 /* ══ search ══ */
 .psearch{position:absolute;left:50%;transform:translateX(-50%);width:100%;max-width:400px;margin:0;z-index:2}
@@ -147,7 +147,7 @@ hr.sep{border:none;border-top:1px solid var(--line);margin:22px 0}
 .phead p{color:var(--soft);font-size:13.5px;margin:9px 0 0;max-width:66ch;line-height:1.62}
 
 /* ══ cards ══ */
-.card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:12px 18px;margin-bottom:15px}
+.card{background:rgba(255,255,255,0.92);border:none;border-radius:15px;padding:12px 18px;margin-bottom:15px;backdrop-filter:blur(12px);box-shadow:0 4px 20px rgba(0,0,0,0.04)}
 .chead{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .chead:empty{display:none}
 .chead h2,.chead h3{font-size:15px;font-weight:600;margin:0}
@@ -380,7 +380,7 @@ select option, select optgroup {
 
 /* collapsible card — same native <details> as the rows, so it stays
    keyboard-operable and correctly announced (PR-82) */
-details.cardc{background:var(--card);border:1px solid var(--line);border-radius:15px;margin-bottom:15px}
+details.cardc{background:rgba(255,255,255,0.92);border:none;border-radius:15px;margin-bottom:15px;box-shadow:0 4px 20px rgba(0,0,0,0.04)}
 details.cardc > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:14px 18px;min-height:48px;box-sizing:border-box;border-radius:15px}
 details.cardc > summary::-webkit-details-marker{display:none}
 details.cardc > summary h3{font-size:15px;font-weight:600;margin:0;line-height:1.3}
@@ -563,7 +563,7 @@ table.t tr:last-child td{border-bottom:none}
 .tw{overflow-x:auto}
 
 /* ══ flow overlay pop-up modal ══ */
-.fl{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.65);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px;box-sizing:border-box}
+.fl{position:fixed;inset:0;z-index:80;background:rgba(16,23,26,.55) !important;backdrop-filter:blur(12px) !important;-webkit-backdrop-filter:blur(12px) !important;display:none;align-items:center;justify-content:center;padding:20px;box-sizing:border-box}
 .fl.on{display:flex}
 .fl-card{background:#ffffff !important;border:1px solid var(--line2);border-radius:20px;width:100%;max-width:580px;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(0,0,0,.35);overflow:hidden;position:relative}
 .flh{border-bottom:none !important;background:transparent !important;flex:0 0 auto}
@@ -646,7 +646,7 @@ table.t tr:last-child td{border-bottom:none}
 .drop span{font-size:12.5px;color:var(--faint)}
 
 /* ══ modal ══ */
-.mod{position:fixed;inset:0;z-index:95;background:rgba(4,4,6,.76);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:22px}
+.mod{position:fixed;inset:0;z-index:95;background:rgba(16,23,26,.55) !important;backdrop-filter:blur(12px) !important;-webkit-backdrop-filter:blur(12px) !important;display:none;align-items:center;justify-content:center;padding:22px}
 .mod.on{display:flex}
 .mod .box{background:var(--card);border:1px solid var(--line2);border-radius:17px;max-width:430px;width:100%;padding:24px;max-height:88vh;overflow-y:auto}
 .mod h3{font-family:var(--serif);font-size:19px;font-weight:600;margin-bottom:9px;letter-spacing:-.01em}
@@ -685,14 +685,63 @@ table.t tr:last-child td{border-bottom:none}
 .dr .cl{position:absolute;right:22px;top:20px;background:none;border:1px solid var(--line2);border-radius:999px;padding:5px 14px;font-size:12.5px;color:var(--soft);cursor:pointer}
 
 /* ══ responsive ══ */
+.rail-user-profile { display: none; }
+.mobile-header-back {
+  display: none; background: none; border: none; padding: 0;
+  color: var(--ink); cursor: pointer; align-items: center; justify-content: center;
+  width: 36px; height: 36px; -webkit-tap-highlight-color: transparent;
+  transition: transform .15s ease;
+}
+.mobile-header-back:hover { transform: translateX(-2px); }
+
 @media(max-width:900px){
-  .shell{grid-template-columns:1fr;gap:0;padding-top:18px}
-  .rail{position:fixed;inset:0;z-index:60;background:var(--bg);padding:18px 22px 60px;overflow-y:auto;display:none}
-  .rail.on{display:block}
-  .railx{display:inline-flex;margin-bottom:14px}
-  .menub{display:inline-block}
-  .top .who .nm{display:none}
-  .psearch{max-width:none;margin-left:2px}
+  html, body { overscroll-behavior-y: none; }
+  .rail-user-profile { display: block; }
+  .shell{grid-template-columns:1fr;gap:20px;padding-top:18px}
+  .rail{position:static !important;inset:auto !important;z-index:1 !important;background:none !important;padding:0 !important;overflow:visible !important;display:block !important;width:100% !important;box-shadow:none !important;border:none !important}
+  .rail.mobile-hide-rail { display: none !important; height: 0 !important; overflow: hidden !important; margin: 0 !important; padding: 0 !important; }
+  .railx{display:none !important}
+  .menub{display:none !important}
+  .top .who .av, .top .who .nm{display:none !important}
+  .psearch{position:relative !important;flex:1 !important;max-width:none !important;margin-left:8px !important}
+  .top.mobile-detail-header .mark { display: none !important; }
+  .top.mobile-detail-header .mobile-header-back { display: inline-flex !important; }
+  .top.mobile-detail-header .psearch { display: none !important; }
+
+  .page { display: none !important; }
+  .page.mobile-show-page { display: block !important; }
+
+  /* Vertical progress timeline on mobile */
+  .tl {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 18px !important;
+    padding-left: 4px !important;
+  }
+  .tl li {
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    gap: 12px !important;
+  }
+  .tl li::before {
+    top: 18px !important;
+    left: 8px !important;
+    bottom: -20px !important;
+    right: auto !important;
+    width: 2px !important;
+    height: auto !important;
+  }
+  .tl li:last-child::before { display: none !important; }
+
+  /* Keep edit icon/action on right side on mobile */
+  .chead { flex-wrap: nowrap !important; justify-content: space-between !important; }
+  .chead .act { margin-left: auto !important; flex: 0 0 auto !important; align-self: flex-start !important; }
+  .prow { flex-wrap: nowrap !important; gap: 12px !important; justify-content: space-between !important; align-items: flex-start !important; }
+  .prow .t { flex: 1 1 auto !important; min-width: 0 !important; }
+  .prow .c { margin-left: auto !important; flex: 0 0 auto !important; margin-top: 0 !important; align-self: flex-start !important; }
 }
 @media(min-width:901px){.railx{display:none}}
 @media(max-width:680px){
@@ -834,7 +883,7 @@ table.t tr:last-child td{border-bottom:none}
 <!-- ══════ product chrome ══════ -->
 <header class="top">
   <div class="in">
-    <button class="menub" id="menuBtn" type="button" aria-expanded="false" aria-controls="rail">Menu</button>
+    <button class="mobile-header-back" type="button" aria-label="Back to Profile Menu" title="Back to Profile Menu" onclick="mobileBack()"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></button>
     <button class="header-proto-btn" id="headerProtoBtn" type="button" title="Toggle Prototype Controls">⚙️ Prototype</button>
     <span class="mark"><span class="wm">Th<span class="i">i</span>nq</span><span class="sub">Profile</span></span>
     <div class="psearch">
@@ -1647,7 +1696,19 @@ function railDef(){
 function renderNav(){
   /* PR-02 — the current destination is marked, and is not listed as navigable
      inside itself. aria-current does both jobs. */
-  var h='';
+  var name = (isPost()||DB.state==='submitted') ? DB.display : 'ARVIND YADAV';
+  var initial = name.charAt(0);
+  var h='<div class="rail-user-profile" style="padding:16px 12px 14px;border-bottom:1px solid var(--line);margin-bottom:12px">'
+    +'<div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:12px">'
+    +'<div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg, #0e3b43, #082830);color:#ffffff;display:grid;place-items:center;font-size:24px;font-weight:700;border:2px solid var(--line2);margin-bottom:8px;box-shadow:0 4px 14px rgba(8,40,48,0.25)">'+esc(initial)+'</div>'
+    +'<div style="font-size:15.5px;font-weight:700;color:var(--ink);letter-spacing:-0.01em">'+esc(name)+'</div>'
+    +'</div>'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px">'
+    +'<div><div style="font-size:15px;font-weight:700;color:var(--ink)">₹2,512.00</div>'
+    +'<div style="font-size:11px;color:var(--ink-3);margin-top:1px">Stocks, FnO Balance</div></div>'
+    +'<button class="mini" type="button" style="padding:4px 10px;font-size:11.5px;border-radius:999px;background:var(--ok-soft);color:var(--ok);border:1px solid var(--ok-line);font-weight:600" onclick="toast(\'Add money interface\')">+ Add money</button>'
+    +'</div></div>';
+
   railDef().forEach(function(grp){
     h+='<div class="rgrp">'+esc(grp.g)+(grp.badge?'<span class="rec">'+esc(grp.badge)+'</span>':'')+'</div>';
     grp.items.forEach(function(it){
@@ -1664,17 +1725,28 @@ function renderNav(){
    PAGES.home is kept only so old references resolve rather than dead-end. */
 function landing(){ return railDef()[0].items[0][0]; }
 var GO_ALIAS={personal:'basic', ids:'demat', account:'closure', freeze:'security', home:null};
+function mobileBack(){
+  $('#main').classList.remove('mobile-show-page');
+  $('#rail').classList.remove('mobile-hide-rail');
+  var topHeader = document.querySelector('header.top');
+  if(topHeader) topHeader.classList.remove('mobile-detail-header');
+}
+
 function go(id){
   if(id==='signout'){ signOut(); return; }
   if(id==='home') id=landing();
   else if(GO_ALIAS[id]) id=GO_ALIAS[id];
   remaskAll();
   cur=id; render();
+  $('#main').classList.add('mobile-show-page');
+  $('#rail').classList.add('mobile-hide-rail');
+  var topHeader = document.querySelector('header.top');
+  if(topHeader) topHeader.classList.add('mobile-detail-header');
   /* Name the surface in the URL so a refresh comes back to it rather than to
      the landing page — and so a link to a Profile surface is a link to that
      surface. replaceState keeps the Back button meaning "leave Profile". */
   try { history.replaceState(null,'','#'+id); } catch(e){}
-  $('#rail').classList.remove('on'); $('#menuBtn').setAttribute('aria-expanded','false');
+  $('#rail').classList.remove('on');
   window.scrollTo(0,0); $('#main').focus();
 }
 
@@ -1684,12 +1756,6 @@ function render(){
   var allowed=[]; railDef().forEach(function(g){ g.items.forEach(function(i){ allowed.push(i[0]); }); });
   if(allowed.indexOf(cur)<0) cur=landing();
   renderNav();
-  /* Add funds removed on owner direction, 24 Aug 2026. It sat above every
-     surface in Profile — the one place §1.4 and PR-50 rule out a money-movement
-     control ("Profile is not a growth surface"), and the one card that made a
-     settings page reload as a funding page. addFundsCard() and the addfunds
-     flow are left in place but now have no surface, so the only route to adding
-     money is the funds screen that owns it. Recorded in the build notes. */
   $('#main').innerHTML = (PAGES[cur]||PAGES.home)();
   trimSubDots();
 }

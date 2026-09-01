@@ -27,6 +27,9 @@ const P: Record<string, React.ReactNode> = {
   signout: <><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l-5-5 5-5M5 12h11" /></>,
   chevron: <><path d="m9 6 6 6-6 6" /></>,
   menu: <><path d="M4 7h16M4 12h16M4 17h16" /></>,
+  orders: <><path d="M6 3h12l1 4H5l1-4z" /><rect x="4" y="7" width="16" height="13" rx="1.5" /><path d="M9 11h6M9 15h4" /></>,
+  refer: <><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></>,
+  support: <><path d="M3 18v-6a9 9 0 0 1 18 0v6" /><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" /></>,
 }
 
 /* the ids the rail and GO_ALIAS already use */

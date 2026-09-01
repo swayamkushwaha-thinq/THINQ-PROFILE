@@ -35,6 +35,7 @@ export interface UiState {
   searchOpen: boolean
   searchQuery: string
   searchIndex: number
+  mobileDetail: boolean
 }
 
 export const ui: UiState = {
@@ -50,6 +51,7 @@ export const ui: UiState = {
   searchOpen: false,
   searchQuery: '',
   searchIndex: -1,
+  mobileDetail: false,
 }
 
 let version = 0
@@ -98,4 +100,5 @@ export function setNavGroup(g: string) { ui.navGroup = g; commitUi() }
 export function setDrawer(on: boolean) { ui.drawerOpen = on; commitUi() }
 export function setPbarOpen(on: boolean) { ui.pbarOpen = on; commitUi() }
 export function setRefs(on: boolean) { ui.refs = on; commitUi() }
+export function setMobileDetail(on: boolean) { ui.mobileDetail = on; commitUi() }
 export function setStateSel(v: string) { ui.stateSel = v; commitUi() }
