@@ -1,0 +1,119 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   THINQ design tokens
+
+   One place for every value the interface is allowed to use. The reference grew
+   22 font sizes, 15 radii and no spacing rule at all; nothing below is a
+   one-off. Components draw from these and never invent their own.
+
+   This file replaces the previous theme.css + refine.css override pair — the
+   system is stated once rather than patched twice.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ══ COLOUR ══════════════════════════════════════════════════════════════
+     Brand is the two picker colours. Everything structural is neutral, so the
+     brand reads as meaning — where you are, what the action is — not as paint. */
+  --brand:        #032129;
+  --brand-2:      #0f252a;
+  --brand-soft:   rgba(3, 33, 41, .06);
+  --brand-line:   rgba(3, 33, 41, .16);
+  --on-brand:     #ffffff;
+
+  /* five surface levels, §4 — each is visibly a step, not a hair */
+  --canvas:       #e9edee;   /* 1 · the page itself                      */
+  --surface:      #ffffff;   /* 2 · primary content panel                */
+  --surface-2:    #f4f7f7;   /* 3 · nested / interactive block           */
+  --field:        #ffffff;   /* 4 · inputs and controls                  */
+  --raised:       #ffffff;   /* 5 · menus, modals, toasts (+ shadow)     */
+  --canvas-deep:  #dfe5e6;   /* wells and inset areas                    */
+
+  /* ink */
+  --ink:          #10171a;   /* primary text            */
+  --ink-2:        #47545a;   /* secondary               */
+  --ink-3:        #5d6c72;   /* muted / metadata — held above 4.5:1 on the canvas */
+  --ink-inv:      #ffffff;
+
+  /* lines */
+  --line:         #dde4e5;
+  --line-2:       #c9d3d5;
+  --line-strong:  #b4c1c4;
+
+  /* state — darkened to carry on light surfaces */
+  --ok:           #0a7d55;  --ok-soft:      #e7f4ee;  --ok-line:     rgba(10, 125, 85, .28);
+  --warn:         #8a5a00;  --warn-soft:    #fbf2e2;  --warn-line:   rgba(138, 90, 0, .28);
+  --danger:       #b03521;  --danger-soft:  #fbecea;  --danger-line: rgba(176, 53, 33, .28);
+  --info-soft:    #eef3f4;
+
+  /* ══ TYPE ════════════════════════════════════════════════════════════════
+     Seven steps, each with a job. Display and headings take the serif; the rest
+     is the UI sans. */
+  --t-display:    30px;   /* page title                    */
+  --t-h2:         19px;   /* section / panel heading       */
+  --t-h3:         15px;   /* card heading, row title       */
+  --t-body:       15px;   /* values, primary reading       */
+  --t-support:    13px;   /* descriptions, labels          */
+  --t-meta:       12px;   /* hints, counters               */
+  --t-micro:      10.5px; /* mono eyebrows and group heads */
+
+  --lh-tight:     1.15;
+  --lh-snug:      1.4;
+  --lh-body:      1.62;
+
+  /* ══ SPACE ═══════════════════════════════════════════════════════════════ */
+  --s1:  4px;  --s2:  8px;  --s3: 12px;  --s4: 16px;  --s5: 20px;
+  --s6: 24px;  --s7: 32px;  --s8: 40px;  --s9: 48px;  --s10: 64px;
+
+  /* ══ RADIUS — four steps, no more ════════════════════════════════════════ */
+  --r-sm:  8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-pill: 999px;
+
+  /* ══ CONTROL HEIGHTS ═════════════════════════════════════════════════════ */
+  --h-xs: 30px;   /* inline mini actions */
+  --h-sm: 36px;   /* small buttons       */
+  --h-md: 42px;   /* buttons, nav items  */
+  --h-lg: 48px;   /* inputs, selects     */
+
+  /* ══ ELEVATION — restraint, not glow ═════════════════════════════════════ */
+  --e-1: 0 1px 2px rgba(16, 23, 26, .05);
+  --e-2: 0 2px 6px rgba(16, 23, 26, .07), 0 1px 2px rgba(16, 23, 26, .05);
+  --e-3: 0 16px 36px -12px rgba(16, 23, 26, .26);
+
+  /* ══ MOTION ══════════════════════════════════════════════════════════════ */
+  --dur-1: 120ms;
+  --dur-2: 160ms;
+  --ease:  cubic-bezier(.2, 0, 0, 1);
+
+  /* ══ LAYOUT ══════════════════════════════════════════════════════════════ */
+  --rail:     264px;
+  --shell-max: 1320px;
+  --measure:   72ch;
+  --header-h:  64px;
+
+  /* the reference's own family tokens, restated here so type lives in one place */
+  /* One face, both grounds, every role. The four family tokens the reference
+     defines are kept — components read them by name — but all four now resolve
+     to the same Inter. var(--font-inter) is the self-hosted variable cut; the
+     literal names behind it pick up a locally installed Inter if there is one.
+     No second UI face, and no monospace: column alignment is done with tabular
+     numerals instead (see system.css). */
+  --sans:  var(--font-inter), "Inter", "Inter Variable", sans-serif;
+  --mono:  var(--font-inter), "Inter", "Inter Variable", sans-serif;
+  --serif: var(--font-inter), "Inter", "Inter Variable", sans-serif;
+  --head:  var(--font-inter), "Inter", "Inter Variable", sans-serif;
+
+  /* ── bridge ──────────────────────────────────────────────────────────────
+     globals.css is the reference stylesheet and still supplies the component
+     vocabulary (.card, .kv, .prow, .nb, .pill …). It reads these names, so they
+     are mapped onto the system above rather than left to drift. */
+  --bg: var(--canvas);   --bg2: var(--surface);
+  --card: var(--surface); --card2: var(--surface-2); --elev: var(--info-soft);
+  --soft: var(--ink-2);   --faint: var(--ink-3);
+  --line2: var(--line-2);
+  --gold: var(--brand);   --gold-2: var(--brand-2); --gold-ink: var(--brand-2);
+  --gold-deep: #4e6569;
+  --gold-wash: var(--brand-soft); --gold-line: var(--brand-line);
+  --on-gold: var(--on-brand);
+  --danger-wash: var(--danger-soft); --ok-wash: var(--ok-soft); --warn-wash: var(--warn-soft);
+}

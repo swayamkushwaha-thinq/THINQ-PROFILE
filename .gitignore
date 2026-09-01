@@ -1,0 +1,26 @@
+# dependencies and build output
+node_modules/
+.next/
+out/
+dist/
+build/
+
+# typescript / next artefacts
+next-env.d.ts
+*.tsbuildinfo
+
+# local env — never commit credentials
+.env
+.env.*
+!.env.example
+
+# editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# logs
+npm-debug.log*
+yarn-error.log*

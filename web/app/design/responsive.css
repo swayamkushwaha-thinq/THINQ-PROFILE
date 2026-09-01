@@ -1,0 +1,122 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   THINQ responsive
+
+   Three designs, not one design at three sizes:
+     ≥1100  rail + canvas, two-up data grid
+     620–1099  single column, navigation becomes a sheet
+     <620   one-handed: header splits, search takes its own line, controls grow
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ══ LARGE DESKTOP — density without stretch ════════════════════════════════ */
+@media (min-width: 1500px) {
+  .shell { gap: var(--s9); }
+}
+
+/* ══ LAPTOP ═════════════════════════════════════════════════════════════════ */
+@media (max-width: 1180px) and (min-width: 1000px) {
+  :root { --rail: 232px; }
+  .shell { gap: var(--s7); }
+}
+
+/* ══ TABLET / SMALL LAPTOP — navigation becomes a sheet ═════════════════════ */
+@media (max-width: 999px) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding: var(--s6) var(--s5) var(--s9);
+  }
+  /* A slide-in panel, not a full-bleed list: it reads as a layer over the page
+     and keeps the page visible behind it, so it is obvious how to get back. */
+  .rail {
+    position: fixed; inset: 0 auto 0 0; z-index: 60;
+    width: min(340px, 88vw);
+    background: var(--surface);
+    border-right: 1px solid var(--line);
+    box-shadow: var(--e-3);
+    padding: var(--s5) var(--s5) calc(var(--s8) + env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
+    display: none;
+  }
+  .rail.on { display: block; }
+  /* scrim */
+  .rail.on::before {
+    content: ""; position: fixed; inset: 0; z-index: -1;
+    background: rgba(16, 23, 26, .38);
+  }
+  .railx {
+    display: inline-flex; margin-bottom: var(--s5); width: 100%;
+    justify-content: center; min-height: var(--h-md);
+  }
+  .menub {
+    display: inline-flex; align-items: center; gap: var(--s2);
+    min-height: var(--h-sm); padding: 0 var(--s4);
+    background: var(--surface); border: 1px solid var(--line-2); border-radius: var(--r-pill);
+    font-size: 13px; font-weight: 500; color: var(--ink); cursor: pointer;
+    transition: background var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
+  }
+  .menub:hover { background: var(--surface-2); border-color: var(--line-strong); }
+  .top .who .nm { display: none; }
+  .psearch { max-width: none; margin-left: var(--s2); }
+}
+@media (min-width: 1000px) { .railx { display: none; } }
+
+/* ══ PHONE ══════════════════════════════════════════════════════════════════ */
+@media (max-width: 680px) {
+  .mark .sub { display: none; }
+  .psearch .pk { display: none; }
+}
+
+@media (max-width: 620px) {
+  /* the header cannot hold brand, nav, search and account on one line at this
+     width — search gets its own, full width, rather than being crushed to a stub */
+  .top .in { flex-wrap: wrap; row-gap: var(--s3); padding: var(--s3) var(--s4); min-height: 0; }
+  .who     { order: 4; }
+  .psearch { order: 5; flex: 1 1 100%; max-width: none; margin-left: 0; }
+  .psearch .pin { min-height: var(--h-md); }
+  .pres { left: 0; right: 0; }
+
+  .shell { padding: var(--s5) var(--s4) calc(var(--s8) + env(safe-area-inset-bottom, 0px)); }
+  .card  { padding: var(--s5) var(--s4); border-radius: var(--r-md); }
+  details.cardc > summary { padding: var(--s4); }
+  details.cardc .body { padding: 0 var(--s4) var(--s4); }
+  .phead { margin-bottom: var(--s5); padding-bottom: var(--s4); }
+
+  /* one action per line reads better than two half-width ones */
+  .flh .in, .flb .in, .flf .in { padding-left: var(--s4); padding-right: var(--s4); }
+  .flf .in { padding-bottom: calc(var(--s4) + env(safe-area-inset-bottom, 0px)); }
+  .flf .in .btn { flex: 1 1 auto; }
+  .flf .in .sp { display: none; }
+  .mod .box { padding: var(--s5); }
+  .dr .pn { padding: var(--s5) var(--s5) var(--s9); width: 100%; }
+  .f2 { grid-template-columns: 1fr; }
+}
+
+/* iOS zooms a focused field under 16px, so every form on the phone zoomed.
+   Attribute-qualified to beat the reference's own `.f input[type=text]`. */
+@media (max-width: 999px) {
+  .f input[type=text], .f input[type=tel], .f input[type=email], .f input[type=date],
+  .f input[type=number], .f select, .f textarea, .ff input, .mobin input,
+  select.pick, #pq, .pilldd { font-size: 16px; }
+}
+
+/* six 52px code boxes plus gaps overflow a 320px phone — let them share the row */
+@media (max-width: 460px) {
+  .otp input { width: auto; flex: 1 1 0; min-width: 0; }
+  .pinin input { width: auto; flex: 1 1 0; min-width: 0; max-width: 64px; }
+}
+
+/* ══ TOUCH ══════════════════════════════════════════════════════════════════
+   Sized by input device, not by width: a small window on a laptop should keep
+   its density, a large phone should not. */
+@media (pointer: coarse) {
+  .btn, .ritem, .menub, .flh .x, .dr .cl, .rgrp { min-height: var(--h-lg); }
+  .btn.sm { min-height: 44px; }
+  .mini { min-height: 36px; }
+  .mini::after { content: ""; position: absolute; inset: -6px -4px; border-radius: inherit; }
+  .fine summary, .col > summary, details.cardc > summary { min-height: var(--h-lg); }
+  .pills span, .relopt span { min-height: 44px; }
+  .tile { padding: var(--s5); }
+}
+
+/* the sticky header must not hide the heading the skip link jumps to */
+#main { scroll-margin-top: calc(var(--header-h) + var(--s4)); }
