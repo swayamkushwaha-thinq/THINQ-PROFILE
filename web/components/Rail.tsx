@@ -72,7 +72,7 @@ export function Rail() {
       
       {/* Top User Profile Header (matching requested layout) */}
       <div className="rail-user-profile" style={{ padding: '16px 12px 14px', borderBottom: '1px solid var(--line)', marginBottom: '12px' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '12px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
           <div style={{
             width: '64px', height: '64px', borderRadius: '50%', background: 'linear-gradient(135deg, #0e3b43, #082830)',
             color: '#ffffff', display: 'grid', placeItems: 'center', fontSize: '24px', fontWeight: 700,
@@ -81,23 +81,6 @@ export function Rail() {
             A
           </div>
           <div style={{ fontSize: '15.5px', fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.01em' }}>ARVIND YADAV</div>
-        </div>
-
-        {/* Wallet Balance Row */}
-        <div style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          background: 'var(--surface-2)', border: '1px solid var(--line)', borderRadius: '12px', padding: '10px 14px'
-        }}>
-          <div>
-            <div style={{ fontSize: '15px', fontWeight: 700, color: 'var(--ink)' }}>₹2,512.00</div>
-            <div style={{ fontSize: '11px', color: 'var(--ink-3)', marginTop: '1px' }}>Stocks, FnO Balance</div>
-          </div>
-          <button className="mini" type="button" style={{
-            padding: '4px 10px', fontSize: '11.5px', borderRadius: '999px',
-            background: 'var(--ok-soft)', color: 'var(--ok)', border: '1px solid var(--ok-line)', fontWeight: 600
-          }} onClick={() => toast('Add money interface')}>
-            + Add money
-          </button>
         </div>
       </div>
 
